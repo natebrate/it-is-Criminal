@@ -1,6 +1,5 @@
 package com.example.criminalintent1;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +28,7 @@ import java.util.*;
 
 import static android.widget.CompoundButton.*;
 
-public class CrimeFragment extends Fragment {
+public class CrimeFragment extends Fragment  {
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
@@ -48,6 +47,8 @@ public class CrimeFragment extends Fragment {
     private File mPhotoFile;
     private Callbacks mCallbacks;
     private Object JOptionPane;
+    private Spinner CrimeSpinner;
+    private String Crimes;
 
     public interface Callbacks {
         void onCrimeUpdated(Crime crime);
@@ -59,7 +60,8 @@ public class CrimeFragment extends Fragment {
         mCallbacks = (Callbacks) context;
     }
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+
+        public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
         CrimeFragment fragment = new CrimeFragment();
@@ -73,16 +75,48 @@ public class CrimeFragment extends Fragment {
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
         mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
+
     }
+
+    //Performing action onItemSelected and onNothing selected
+    /*@Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        CrimeSpinner.findViewById(R.id.crime_title);
+        ArrayAdapter<CharSequence> aa = ArrayAdapter.createFromResource( getActivity(), R.array.crime_title, android.R.layout.simple_spinner_item);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CrimeSpinner.setOnItemSelectedListener(this);
+        CrimeSpinner.setAdapter(aa);
+
+    }*/
+
+   /* @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(),text , Toast.LENGTH_LONG).show();
+        mCrime.setmTitle(toString());
+        updateCrime();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // TODO Auto-generated method stub
+    }*/
+
+
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
-        mTitleField = v.findViewById(R.id.crime_title);
 
-        mTitleField.setText(mCrime.getmTitle());
-        mTitleField.addTextChangedListener(new TextWatcher() {
+
+
+        View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        //CrimeSpinner = v.findViewById(R.id.crime_title);
+        //mTitleField.setText(mCrime.getmTitle());
+        /*mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
@@ -94,12 +128,29 @@ public class CrimeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) { }
+        });*/
+
+        CrimeSpinner = (Spinner) v.findViewById(R.id.crime_title);
+        List<String> rows = new ArrayList<String>();
+        rows.add("Theft");
+        rows.add("Homicides");
+        rows.add("Assault");
+        rows.add("White Collar");
+        rows.add("Battery");
+
+        ArrayAdapter<String> daRow = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, rows);
+        daRow.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CrimeSpinner.setAdapter(daRow);
+        CrimeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(parent.getContext(), "Selected crime title: " + String.valueOf(CrimeSpinner.getSelectedItem()), Toast.LENGTH_LONG).show();
+                mCrime.setTitle(String.valueOf(CrimeSpinner.getSelectedItem()));     }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
         });
 
-        if (mTitleField.equals("")){
-            ActionBar alertDialog = null;
-            alertDialog.setTitle("Cannot Accept blank record");
-        }
 
         mDateButton = v.findViewById(R.id.crime_date);
         updateDate();

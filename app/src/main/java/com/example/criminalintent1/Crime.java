@@ -4,9 +4,11 @@ import java.util.*;
 
 public class Crime {
     private UUID mId;
-    private String mTitle;
+    private String mTitle = "Petty Crime";
     private Date mDate;
-    private boolean mSolved;
+    private String mCrimes;
+    private boolean mSolved = false;
+    private String mDetails = "Details Unavailabe";
 
     private String mSuspect;
 
@@ -17,6 +19,14 @@ public class Crime {
     public Crime(UUID id) {
         mId = id;
         mDate = new Date();
+    }
+
+    public String getmCrimes() {
+        return mCrimes;
+    }
+
+    public void setmCrimes(String mCrime) {
+        this.mCrimes = mCrime;
     }
 
     public UUID getmId() {
@@ -61,5 +71,8 @@ public class Crime {
 
     public String getPhotoFilename() {
         return "IMG_" + getmId().toString() + ".jpg";
+    }
+
+    public void setTitle(String valueOf) {
     }
 }
