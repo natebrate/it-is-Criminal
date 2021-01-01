@@ -37,7 +37,7 @@ public class CrimeFragment extends Fragment  {
     private static final int REQUEST_PHOTO = 2;
 
     private Crime mCrime;
-    private EditText mTitleField;
+    //private EditText mTitleField;
     private Button mDateButton;
     private Button mReportButton;
     private Button mSuspectButton;
@@ -72,46 +72,18 @@ public class CrimeFragment extends Fragment  {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
         mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
 
     }
 
-    //Performing action onItemSelected and onNothing selected
-    /*@Override
-    public void onActivityCreated(Bundle savedInstanceState){
-        super.onActivityCreated(savedInstanceState);
-        CrimeSpinner.findViewById(R.id.crime_title);
-        ArrayAdapter<CharSequence> aa = ArrayAdapter.createFromResource( getActivity(), R.array.crime_title, android.R.layout.simple_spinner_item);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        CrimeSpinner.setOnItemSelectedListener(this);
-        CrimeSpinner.setAdapter(aa);
-
-    }*/
-
-   /* @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),text , Toast.LENGTH_LONG).show();
-        mCrime.setmTitle(toString());
-        updateCrime();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // TODO Auto-generated method stub
-    }*/
-
-
-
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
 
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
         //CrimeSpinner = v.findViewById(R.id.crime_title);
@@ -130,6 +102,7 @@ public class CrimeFragment extends Fragment  {
             public void afterTextChanged(Editable s) { }
         });*/
 
+        //Spinner for crime list
         CrimeSpinner = (Spinner) v.findViewById(R.id.crime_title);
         List<String> rows = new ArrayList<String>();
         rows.add("Theft");
@@ -145,7 +118,9 @@ public class CrimeFragment extends Fragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(parent.getContext(), "Selected crime title: " + String.valueOf(CrimeSpinner.getSelectedItem()), Toast.LENGTH_LONG).show();
-                mCrime.setTitle(String.valueOf(CrimeSpinner.getSelectedItem()));     }
+                mCrime.setTitle(String.valueOf(CrimeSpinner.getSelectedItem()));
+            updateCrime();
+            }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
@@ -234,6 +209,8 @@ public class CrimeFragment extends Fragment  {
                  startActivityForResult(captureImage, REQUEST_PHOTO);
                 }
         });
+
+
         mPhotoView = v.findViewById(R.id.crime_photo);
         updatePhotoView();
         return v;

@@ -18,14 +18,12 @@ public class PictureUtils {
     public static final int MEDIA_TYPE_VIDEO = 2;
 
     public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
-        //Чтение размеров на диске
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(path, options);
 
         float scrWidth = options.outWidth;
         float scrHeight = options.outHeight;
-        //Вычисление степени масштабирования
         int inSampleSize = 1;
         if (scrHeight > destHeight || scrWidth > destWidth) {
             float heightScale = scrHeight / destHeight;
@@ -34,6 +32,7 @@ public class PictureUtils {
         }
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;
+
         //Чтение данных и создание итогового изображения
         return BitmapFactory.decodeFile(path, options);
     }
@@ -46,7 +45,7 @@ public class PictureUtils {
 
     private static File getOutputMediaFile(int type) {
         // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
+        // Environment.getExternalStorageState() before doing this.
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "MyCameraApp");
@@ -75,4 +74,6 @@ public class PictureUtils {
         }
         return mediaFile;
     }
+
+
 }
