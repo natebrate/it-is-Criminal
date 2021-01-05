@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">犯罪报告CriminalIntent</string>
+    <string name="crime_title_hint">输入犯罪标题</string>
+    <string name="crime_title_label">标题</string>
+    <string name="crime_details_label">详细</string>
+    <string name="crime_solved_label">已解决</string>
+    <string name="solve_details_label">解决细节</string>
+    <string name="date_picker_title">犯罪日期时间</string>
+    <string name="new_crime">新的犯罪</string>
+    <string name="active_crime">活动犯罪</string>
+    <string name="archive_crime">存档犯罪</string>
+    <string name="delete_crime">删除犯罪</string>
+    <string name="export_csv">导出csv文件</string>
+    <string name="import_csv">导入CSV文件</string>
+    <string name="show_subtitle">显示子标题</string>
+    <string name="hide_subtitle">隐藏子标题</string>
+    <string name="show_archived">显示归档</string>
+    <string name="show_active">显示活动</string>
+    <string name="sort_by">排序方式</string>
+    <string name="subtitle_format">%1$d 活动犯罪</string>
+    <string name="archive_format">%1$d 存档犯罪</string>
+    <string name="crime_suspect_text">选择嫌疑人</string>
+    <string name="crime_report_text">发送犯罪报告</string>
+    <string name="crime_report">%1$s!
+    犯罪已发生在 %2$s. %3$s. %4$s. %5$s
+  </string>
+    <string name="crime_report_solved">本案例已解决：</string>
+    <string name="crime_report_unsolved">本案例未解决</string>
+    <string name="crime_report_no_suspect">没有嫌疑人。</string>
+    <string name="crime_report_suspect">嫌疑人是 %s</string>
+    <string name="crime_report_subject">犯罪报告CriminalIntent程序的犯罪报告</string>
+    <string name="send_report">以何种方式发送犯罪报告</string>
+
+
+</resources>

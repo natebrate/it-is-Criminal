@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/active_crime"
+        android:icon="@drawable/ic_active"
+        android:title="@string/active_crime"
+        app:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/archive_crime"
+        android:icon="@drawable/ic_archive"
+        android:title="@string/archive_crime"
+        app:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/delete_crime"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete_crime"
+        app:showAsAction="ifRoom|withText"/>
+
+</menu>
